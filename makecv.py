@@ -1,9 +1,8 @@
 import os
+import subprocess
 
-import pprint
 from langchain_community.document_loaders import (
     WebBaseLoader,
-    TextLoader,
     PDFMinerLoader,
 )
 from langchain_openai import ChatOpenAI
@@ -14,7 +13,7 @@ from pydantic.v1 import SecretStr
 from operator import itemgetter
 
 
-def save_pdf(text: str, filename: str) -> None:
+def save_pdf(text: str, filename: str = "cover_letter.md") -> None:
     with open(filename, "w") as file:
         file.write(text)
 
@@ -46,7 +45,9 @@ def main() -> None:
         input_variables=["job_listing_text", "resume_text"],
         template="""
             Please write a cover letter formatted in markdown for the following job listing and resume. \
-            Give me only the letter, no preamble nor any other text. DO NOT format the markdown within triple backticks. \
+            Start the cover letter with an H1 header of the form "# *Company Name* Cover Letter". \
+            Give me only the letter, no preamble nor any other text. Enclose any library/developer tool in single backicks. \
+            Make any project name italicized. \
             Use only experiences, projects, and skills that are directly contained in the resume. \
             The general format is as follows:
             1. A few (1-3) sentences summarizing what the company does.
@@ -73,16 +74,26 @@ def main() -> None:
         | prompt
         | llm
         | StrOutputParser()
+        | save_pdf
     )
 
-    pp = pprint.PrettyPrinter(indent=4)
-    pp.pprint(
-        chain.invoke(
-            {
-                "url": "https://github.com/DarkHawk727/ARM-LEG-Simulator/blob/main/readme.md",
-                "filepath": "resume.pdf",
-            }
-        )
+    chain.invoke(
+        {
+            "url": "https://github.com/DarkHawk727/ARM-LEG-Simulator/blob/main/readme.md",
+            "filepath": "resume.pdf",
+        }
+    )
+
+
+    subprocess.run(
+        [
+            "mdpdf",
+            "-o",
+            "cov.pdf",
+            "--footer",
+            "{date},COMPANY NAME,{page}",
+            "cover_letter.md",
+        ]
     )
 
 
