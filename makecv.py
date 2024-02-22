@@ -1,42 +1,36 @@
-import argparse
-import asyncio
-import logging
 import os
-import subprocess
-import sys
 
-from langchain_community.document_loaders import WebBaseLoader
-from langchain_community.document_transformers import Html2TextTransformer
-from langchain_openai import OpenAI
+import pprint
+from langchain_community.document_loaders import WebBaseLoader, TextLoader
+from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from langchain.prompts import PromptTemplate
-from langchain_core.runnables import RunnableLambda
+from langchain_core.runnables import RunnableLambda, RunnableMap
 from pydantic.v1 import SecretStr
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-
-def extract_text(url: str) -> str:
-    """Extract text from the given URL."""
-    return WebBaseLoader(url).load()[0].page_content    
+from operator import itemgetter
 
 
 def save_pdf(text: str, filename: str) -> None:
-    """Save the given text to a PDF file."""
-    subprocess.run(
-        ["pandoc", "-o", filename, "--pdf-engine=xelatex"], input=text, text=True
-    )
+    raise NotImplementedError
 
 
 def main() -> None:
-    api_key: str = os.getenv(
-        "OPENAI_API_KEY", default="sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+    API_KEY: SecretStr = SecretStr(
+        os.getenv(
+            "OPENAI_API_KEY",
+            default="sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        )
     )
 
-    # I think we can get it to: chain = get_html | prompt | llm | StrOutputParser() | save_pdf using the LCEL
-    get_job_listing: RunnableLambda = RunnableLambda(lambda x: extract_text(url=x['url']))
-    llm = OpenAI(model="gpt-4", api_key=SecretStr(api_key), max_tokens=1000)
+    get_job_listing: RunnableLambda = RunnableLambda(
+        lambda url: WebBaseLoader(web_path=url).load()[0].page_content
+    )
+    get_resume_content: RunnableLambda = RunnableLambda(
+        lambda filepath: TextLoader(file_path=filepath).load()[0].page_content
+    )
+
+    llm = ChatOpenAI(model="gpt-4-0613", api_key=API_KEY, max_tokens=1000)  # Change model later
+
     prompt = PromptTemplate(
         input_variables=["job_listing_text", "resume_text"],
         template="""
@@ -56,11 +50,13 @@ def main() -> None:
             {resume_text}
             """,
     )
-    save_pdf = RunnableLambda(lambda x: save_pdf(text=x, filename="cover_letter.pdf"))
+    chain: RunnableMap = RunnableMap({
+        "job_listing_text": itemgetter("url") | get_job_listing,
+        "resume_text":  itemgetter("filepath") | get_resume_content,
+    }) | prompt | llm | StrOutputParser()
 
-    # print(get_job_listing.invoke({"url": "https://www.indeed.com/"}))
-    chain = get_job_listing | prompt | llm | StrOutputParser() | save_pdf
-    chain.invoke({"url": "https://www.indeed.com/"})
+    pp = pprint.PrettyPrinter(indent=4)
+    pp.pprint(chain.invoke({"url": "https://github.com/DarkHawk727/ARM-LEG-Simulator/blob/main/readme.md", "filepath": "main.tex"}))
 
 
 if __name__ == "__main__":
