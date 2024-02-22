@@ -13,21 +13,24 @@ from pydantic.v1 import SecretStr
 from operator import itemgetter
 
 
+# TODO: Make delete this file after you're done with it.
 def save_pdf(text: str, filename: str = "cover_letter.md") -> None:
     with open(filename, "w") as file:
         file.write(text)
 
 
-def compress_newlines(text: str) -> str:
-    return "\n".join(filter(None, text.split("\n")))
-
-
+# TODO: Add some progress bars to the code/ completion checks for each step.
+# TODO: Make this a CLI tool
 def main() -> None:
     API_KEY: SecretStr = SecretStr(
         os.getenv(
             "OPENAI_API_KEY",
             default="sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
         )
+    )
+
+    compress_newlines: RunnableLambda = RunnableLambda(
+        lambda text: "\n".join(filter(None, text.split("\n")))
     )
 
     get_job_listing: RunnableLambda = RunnableLambda(
@@ -84,6 +87,7 @@ def main() -> None:
         }
     )
 
+    # Make the Title the same as the company name
     subprocess.run(
         [
             "mdpdf",
@@ -100,6 +104,8 @@ def main() -> None:
             "Cover Letter",
         ]
     )
+
+    os.remove("cover_letter.md")  # Should be a context manager
 
 
 if __name__ == "__main__":
