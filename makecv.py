@@ -1,7 +1,7 @@
 import os
 
 import pprint
-from langchain_community.document_loaders import WebBaseLoader, TextLoader
+from langchain_community.document_loaders import WebBaseLoader, TextLoader, PDFMinerLoader
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from langchain.prompts import PromptTemplate
@@ -13,6 +13,8 @@ from operator import itemgetter
 def save_pdf(text: str, filename: str) -> None:
     raise NotImplementedError
 
+def compress_newlines(text: str) -> str:
+    return "\n".join(filter(None, text.split("\n")))
 
 def main() -> None:
     API_KEY: SecretStr = SecretStr(
@@ -26,7 +28,7 @@ def main() -> None:
         lambda url: WebBaseLoader(web_path=url).load()[0].page_content
     )
     get_resume_content: RunnableLambda = RunnableLambda(
-        lambda filepath: TextLoader(file_path=filepath).load()[0].page_content
+        lambda filepath: PDFMinerLoader(file_path=filepath).load()[0].page_content
     )
 
     llm = ChatOpenAI(model="gpt-4-0613", api_key=API_KEY, max_tokens=1000)  # Change model later
@@ -51,12 +53,12 @@ def main() -> None:
             """,
     )
     chain: RunnableMap = RunnableMap({
-        "job_listing_text": itemgetter("url") | get_job_listing,
+        "job_listing_text": itemgetter("url") | get_job_listing | compress_newlines,
         "resume_text":  itemgetter("filepath") | get_resume_content,
     }) | prompt | llm | StrOutputParser()
 
     pp = pprint.PrettyPrinter(indent=4)
-    pp.pprint(chain.invoke({"url": "https://github.com/DarkHawk727/ARM-LEG-Simulator/blob/main/readme.md", "filepath": "main.tex"}))
+    pp.pprint(chain.invoke({"url": "https://github.com/DarkHawk727/ARM-LEG-Simulator/blob/main/readme.md", "filepath": "resume.pdf"}))
 
 
 if __name__ == "__main__":
