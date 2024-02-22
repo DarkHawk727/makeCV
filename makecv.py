@@ -84,15 +84,20 @@ def main() -> None:
         }
     )
 
-
     subprocess.run(
         [
             "mdpdf",
             "-o",
             "cov.pdf",
+            "--header",
+            "{date},{heading},{page}",
             "--footer",
-            "{date},COMPANY NAME,{page}",
+            ",Arjun Sarao,",
             "cover_letter.md",
+            "-a",
+            "Arjun Sarao",
+            "-t",
+            "Cover Letter",
         ]
     )
 

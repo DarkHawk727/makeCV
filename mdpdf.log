@@ -1,42 +1,49 @@
-    INFO: 2024-02-22 16:48:30,190:               log.py:   20: Logging to C:\Users\Arjun Sarao\makeCV\mdpdf.log
-   DEBUG: 2024-02-22 16:48:30,190:               cli.py:  103: cov.md
-    INFO: 2024-02-22 16:48:30,191:         converter.py:   14: cov.md
-   DEBUG: 2024-02-22 16:48:30,193:      pdf_renderer.py:  470: printSegment: ARM-LEG Cover Letter
-   DEBUG: 2024-02-22 16:48:30,195:      pdf_renderer.py:  470: printSegment: Dear Hiring Manager,
-   DEBUG: 2024-02-22 16:48:30,198:      pdf_renderer.py:  470: printSegment: Your company, DarkHawk727, is a renowned platform that offers an ARM-LEG Simulator, a Pseudo-ARM
-   DEBUG: 2024-02-22 16:48:30,199:      pdf_renderer.py:  470: printSegment: Assembly Simulator written in 
-   DEBUG: 2024-02-22 16:48:30,200:      pdf_renderer.py:  470: printSegment: Python
-   DEBUG: 2024-02-22 16:48:30,206:      pdf_renderer.py:  470: printSegment: . The simulator assists users in understanding the nuances of assembly
-   DEBUG: 2024-02-22 16:48:30,207:      pdf_renderer.py:  470: printSegment: programming, thereby contributing significantly to the learning curve of budding programmers and professionals
-   DEBUG: 2024-02-22 16:48:30,207:      pdf_renderer.py:  470: printSegment: alike.
-   DEBUG: 2024-02-22 16:48:30,247:      pdf_renderer.py:  470: printSegment: As a Computer Science student at the University of Waterloo with an extensive background in Python and assembly
-   DEBUG: 2024-02-22 16:48:30,270:      pdf_renderer.py:  470: printSegment: programming, I am confident that my experience and skills align well with your requirements. Most notably, I  have
-   DEBUG: 2024-02-22 16:48:30,281:      pdf_renderer.py:  470: printSegment: already developed a similar project named ARM-LEG Simulator as part of  my coursework. This project involved
-   DEBUG: 2024-02-22 16:48:30,284:      pdf_renderer.py:  470: printSegment: writing a CLI program following the best practices of modular Python design and Object-Oriented Design
-   DEBUG: 2024-02-22 16:48:30,285:      pdf_renderer.py:  470: printSegment: principles. Additionally, I have added a test suite using 
-   DEBUG: 2024-02-22 16:48:30,285:      pdf_renderer.py:  470: printSegment: pytest
-   DEBUG: 2024-02-22 16:48:30,286:      pdf_renderer.py:  470: printSegment:  and linting using ruff, integrating them into GitHub
-   DEBUG: 2024-02-22 16:48:30,286:      pdf_renderer.py:  470: printSegment: Actions.
-   DEBUG: 2024-02-22 16:48:30,291:      pdf_renderer.py:  470: printSegment: During my tenure as a Full-Stack Web Developer at Starai Tutoring, I honed my skills in JavaScript (React.js) and
-   DEBUG: 2024-02-22 16:48:30,292:      pdf_renderer.py:  470: printSegment: Bulma.css. My experience with these technologies, along with my proficiency in 
-   DEBUG: 2024-02-22 16:48:30,292:      pdf_renderer.py:  470: printSegment: Git
-   DEBUG: 2024-02-22 16:48:30,293:      pdf_renderer.py:  470: printSegment: , Google Cloud Platform (
-   DEBUG: 2024-02-22 16:48:30,293:      pdf_renderer.py:  470: printSegment: Firebase
-   DEBUG: 2024-02-22 16:48:30,293:      pdf_renderer.py:  470: printSegment: ), VS Code, 
-   DEBUG: 2024-02-22 16:48:30,294:      pdf_renderer.py:  470: printSegment: PyCharm
-   DEBUG: 2024-02-22 16:48:30,294:      pdf_renderer.py:  470: printSegment: , 
-   DEBUG: 2024-02-22 16:48:30,294:      pdf_renderer.py:  470: printSegment: IntelliJ
-   DEBUG: 2024-02-22 16:48:30,295:      pdf_renderer.py:  470: printSegment: , could be beneficial for improving the user interface of the
-   DEBUG: 2024-02-22 16:48:30,295:      pdf_renderer.py:  470: printSegment: ARM-LEG Simulator.
-   DEBUG: 2024-02-22 16:48:30,317:      pdf_renderer.py:  470: printSegment: In the same vein, my passion for self-learning has led me to complete the Machine Learning Specialization and
-   DEBUG: 2024-02-22 16:48:30,329:      pdf_renderer.py:  470: printSegment: Deep Learning Specialization from Stanford Online + Coursera. The insight gained from these courses, particularly
-   DEBUG: 2024-02-22 16:48:30,332:      pdf_renderer.py:  470: printSegment: in neural networks, decision trees, clustering, and anomaly detection, could be utilized to incorporate AI features
-   DEBUG: 2024-02-22 16:48:30,332:      pdf_renderer.py:  470: printSegment: into the ARM-LEG Simulator, thereby enhancing its functionality.
-   DEBUG: 2024-02-22 16:48:30,340:      pdf_renderer.py:  470: printSegment: I look forward to the possibility of contributing to DarkHawk727. I am excited about the opportunity to bring my
-   DEBUG: 2024-02-22 16:48:30,341:      pdf_renderer.py:  470: printSegment: unique blend of skills and experience to your team and believe could add significant value to your innovative efforts.
-   DEBUG: 2024-02-22 16:48:30,341:      pdf_renderer.py:  470: printSegment: Thank you for considering my application.
-   DEBUG: 2024-02-22 16:48:30,342:      pdf_renderer.py:  470: printSegment: Sincerely,
-   DEBUG: 2024-02-22 16:48:30,343:      pdf_renderer.py:  470: printSegment: Arjun Sarao
-   DEBUG: 2024-02-22 16:48:30,344:      pdf_renderer.py:  470: printSegment:  
-   DEBUG: 2024-02-22 16:48:30,344:      pdf_renderer.py:  470: printSegment: arjun.sarao@uwaterloo.ca
-   DEBUG: 2024-02-22 16:48:30,346:      pdf_renderer.py:   53: 0, [1, 'ARM-LEG Cover Letter', 1, 68.0]
+    INFO: 2024-02-22 17:11:19,087:               log.py:   20: Logging to C:\Users\Arjun Sarao\makeCV\mdpdf.log
+   DEBUG: 2024-02-22 17:11:19,088:               cli.py:  103: cover_letter.md
+    INFO: 2024-02-22 17:11:19,088:         converter.py:   14: cover_letter.md
+   DEBUG: 2024-02-22 17:11:19,091:      pdf_renderer.py:  470: printSegment: ARM-LEG-Simulator Cover Letter
+   DEBUG: 2024-02-22 17:11:19,101:      pdf_renderer.py:  470: printSegment: ARM-LEG-Simulator is an open-source software project hosted on GitHub. It is a Pseudo-ARM Assembly
+   DEBUG: 2024-02-22 17:11:19,104:      pdf_renderer.py:  470: printSegment: Simulator written in Python, providing a platform for coders to test and debug their ARM Assembly code in a
+   DEBUG: 2024-02-22 17:11:19,104:      pdf_renderer.py:  470: printSegment: simulated environment.
+   DEBUG: 2024-02-22 17:11:19,108:      pdf_renderer.py:  470: printSegment: As an experienced Full-Stack Web Developer and AI Solution Specialist, I believe I can bring valuable
+   DEBUG: 2024-02-22 17:11:19,109:      pdf_renderer.py:  470: printSegment: contributions to the ARM-LEG-Simulator project. One of the key projects I
+   DEBUG: 2024-02-22 17:11:19,109:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2024-02-22 17:11:19,120:      pdf_renderer.py:  470: printSegment: ve worked on is the ARM-LEG
+   DEBUG: 2024-02-22 17:11:19,127:      pdf_renderer.py:  470: printSegment: Simulator project itself, where I wrote a Command Line Interface (CLI) program following modular design Python
+   DEBUG: 2024-02-22 17:11:19,128:      pdf_renderer.py:  470: printSegment: best practices and Object-Oriented Design principles. This experience has given me a deep understanding of the
+   DEBUG: 2024-02-22 17:11:19,128:      pdf_renderer.py:  470: printSegment: project
+   DEBUG: 2024-02-22 17:11:19,128:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2024-02-22 17:11:19,129:      pdf_renderer.py:  470: printSegment: s codebase, making me well-suited to contribute in a significant way.
+   DEBUG: 2024-02-22 17:11:19,129:      pdf_renderer.py:  470: printSegment: Moreover, I
+   DEBUG: 2024-02-22 17:11:19,130:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2024-02-22 17:11:19,130:      pdf_renderer.py:  470: printSegment: ve integrated a test-suite using 
+   DEBUG: 2024-02-22 17:11:19,131:      pdf_renderer.py:  470: printSegment: pytest
+   DEBUG: 2024-02-22 17:11:19,132:      pdf_renderer.py:  470: printSegment:  and linting using 
+   DEBUG: 2024-02-22 17:11:19,133:      pdf_renderer.py:  470: printSegment: ruff
+   DEBUG: 2024-02-22 17:11:19,145:      pdf_renderer.py:  470: printSegment:  into GitHub Actions for this project,
+   DEBUG: 2024-02-22 17:11:19,154:      pdf_renderer.py:  470: printSegment: showcasing my proficiency in using these tools. My other professional experiences, such as developing a
+   DEBUG: 2024-02-22 17:11:19,156:      pdf_renderer.py:  470: printSegment: Generative-AI-assisted RFP evaluation platform at City of Hamilton ITS and a multi-page static website for Starai
+   DEBUG: 2024-02-22 17:11:19,156:      pdf_renderer.py:  470: printSegment: Tutoring using JavaScript (
+   DEBUG: 2024-02-22 17:11:19,157:      pdf_renderer.py:  470: printSegment: React.js
+   DEBUG: 2024-02-22 17:11:19,157:      pdf_renderer.py:  470: printSegment: ) and 
+   DEBUG: 2024-02-22 17:11:19,157:      pdf_renderer.py:  470: printSegment: Bulma.css
+   DEBUG: 2024-02-22 17:11:19,158:      pdf_renderer.py:  470: printSegment: , have equipped me with a broad skillset in software
+   DEBUG: 2024-02-22 17:11:19,158:      pdf_renderer.py:  470: printSegment: development.
+   DEBUG: 2024-02-22 17:11:19,160:      pdf_renderer.py:  470: printSegment: In addition to my technical skills, my self-learning journey has equipped me with a solid foundation in Machine
+   DEBUG: 2024-02-22 17:11:19,161:      pdf_renderer.py:  470: printSegment: Learning and Deep Learning. I
+   DEBUG: 2024-02-22 17:11:19,161:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2024-02-22 17:11:19,183:      pdf_renderer.py:  470: printSegment: ve completed the Machine Learning Specialization from Stanford Online + Coursera
+   DEBUG: 2024-02-22 17:11:19,196:      pdf_renderer.py:  470: printSegment: and the Deep Learning Specialization from Coursera. These courses have given me a deep understanding of
+   DEBUG: 2024-02-22 17:11:19,203:      pdf_renderer.py:  470: printSegment: Supervised Machine Learning, Advanced Learning Algorithms, Unsupervised Learning, Recommenders,
+   DEBUG: 2024-02-22 17:11:19,204:      pdf_renderer.py:  470: printSegment: Reinforcement Learning, Neural Networks, and Deep Learning. These skills can be particularly useful in optimizing
+   DEBUG: 2024-02-22 17:11:19,205:      pdf_renderer.py:  470: printSegment: the simulator
+   DEBUG: 2024-02-22 17:11:19,205:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2024-02-22 17:11:19,205:      pdf_renderer.py:  470: printSegment: s performance and adding new features.
+   DEBUG: 2024-02-22 17:11:19,206:      pdf_renderer.py:  470: printSegment: I
+   DEBUG: 2024-02-22 17:11:19,206:      pdf_renderer.py:  470: printSegment: '
+   DEBUG: 2024-02-22 17:11:19,211:      pdf_renderer.py:  470: printSegment: m excited about the opportunity to contribute to ARM-LEG-Simulator and look forward to potentially bringing my
+   DEBUG: 2024-02-22 17:11:19,211:      pdf_renderer.py:  470: printSegment: skills and experiences to your team. Thank you for considering my application.
+   DEBUG: 2024-02-22 17:11:19,212:      pdf_renderer.py:  470: printSegment: Best regards,
+   DEBUG: 2024-02-22 17:11:19,212:      pdf_renderer.py:  470: printSegment:  
+   DEBUG: 2024-02-22 17:11:19,212:      pdf_renderer.py:  470: printSegment: Arjun Sarao
+   DEBUG: 2024-02-22 17:11:19,214:      pdf_renderer.py:   53: 0, [1, 'ARM-LEG-Simulator Cover Letter', 1, 68.0]
