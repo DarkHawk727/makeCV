@@ -35,7 +35,7 @@ def save_pdf(text: str, filename: str) -> None:
 
 def main() -> None:
     api_key: str = os.getenv(
-        "OPENAI_API_KEY", default="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"
+        "OPENAI_API_KEY", default="sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
     )
 
     # I think we can get it to: chain = get_html | prompt | llm | StrOutputParser() | save_pdf using the LCEL
