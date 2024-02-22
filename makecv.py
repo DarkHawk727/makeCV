@@ -5,12 +5,13 @@ import os
 import subprocess
 import sys
 
-from langchain_community.document_loaders import HtmlLoader
+from langchain_community.document_loaders import UnstructuredURLLoader
 from langchain_community.document_transformers import Html2TextTransformer
 from langchain_openai import OpenAI
-from langchain.output_parsers import StrOutputParser
+from langchain_core.output_parsers import StrOutputParser
 from langchain.prompts import PromptTemplate
 from langchain_core.runnables import RunnableLambda
+from pydantic.v1 import SecretStr
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -20,7 +21,7 @@ def extract_text(url: str) -> str:
     """Extract text from the given URL."""
     return (
         Html2TextTransformer()
-        .transform_documents(documents=HtmlLoader(web_path=url).load())[0]
+        .transform_documents(documents=UnstructuredURLLoader(urls=[url]).load())[0]
         .page_content
     )
 
@@ -33,11 +34,13 @@ def save_pdf(text: str, filename: str) -> None:
 
 
 def main() -> None:
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key: str = os.getenv(
+        "OPENAI_API_KEY", default="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"
+    )
 
     # I think we can get it to: chain = get_html | prompt | llm | StrOutputParser() | save_pdf using the LCEL
     get_job_listing: RunnableLambda = RunnableLambda(lambda x: extract_text(url=x))
-    llm = OpenAI(model="gpt-4", api_key=api_key, max_tokens=1000)
+    llm = OpenAI(model="gpt-4", api_key=SecretStr(api_key), max_tokens=1000)
     prompt = PromptTemplate(
         input_variables=["job_listing_text", "resume_text"],
         template="""
