@@ -1,5 +1,6 @@
 import os
 import subprocess
+import sys
 
 from langchain_community.document_loaders import (
     WebBaseLoader,
@@ -13,10 +14,27 @@ from pydantic.v1 import SecretStr
 from operator import itemgetter
 
 
-# TODO: Make delete this file after you're done with it.
-def save_pdf(text: str, filename: str = "cover_letter.md") -> None:
-    with open(filename, "w") as file:
-        file.write(text)
+def generate_cover_letter(text: str) -> None:
+    with open(file="cov.md", mode="w") as f:
+        f.write(text)
+
+    subprocess.run(
+        [
+            "mdpdf",
+            "-o",
+            "Arjun_Sarao_Cover_Letter.pdf",
+            "--header",
+            "{date},{heading},{page}",
+            "--footer",
+            ",Arjun Sarao,",
+            f.name,
+            "-a",
+            "Arjun Sarao",
+            "-t",
+            "Cover Letter",
+        ]
+    )
+    os.remove(path="cov.md")
 
 
 # TODO: Add some progress bars to the code/ completion checks for each step.
@@ -65,6 +83,10 @@ def main() -> None:
             {resume_text}
             """,
     )
+
+    save_pdf = RunnableLambda(
+        lambda cover_letter: generate_cover_letter(text=cover_letter)
+    )
     chain = (
         RunnableMap(
             {
@@ -80,32 +102,23 @@ def main() -> None:
         | save_pdf
     )
 
+    if len(sys.argv) != 2:
+        print("Usage: python makecv.py <job_listing_url> <resume_pdf_path>")
+        sys.exit(1)
+    elif len(sys.argv) == 2:
+        url = sys.argv[1]
+        fp = "resume.pdf"
+    else:
+        url = sys.argv[1]
+        fp = sys.argv[2]
+
     chain.invoke(
         {
-            "url": "https://github.com/DarkHawk727/ARM-LEG-Simulator/blob/main/readme.md",
-            "filepath": "resume.pdf",
+            "url": url,
+            "filepath": fp,
         }
     )
-
-    # Make the Title the same as the company name
-    subprocess.run(
-        [
-            "mdpdf",
-            "-o",
-            "cov.pdf",
-            "--header",
-            "{date},{heading},{page}",
-            "--footer",
-            ",Arjun Sarao,",
-            "cover_letter.md",
-            "-a",
-            "Arjun Sarao",
-            "-t",
-            "Cover Letter",
-        ]
-    )
-
-    os.remove("cover_letter.md")  # Should be a context manager
+    print("Cover letter generated successfully")
 
 
 if __name__ == "__main__":
