@@ -23,3 +23,12 @@ You will then need to populate the `.env` file with your OpenAI API key.
 ```sh
 makecv https://www.example.com/link/to/job-posting --resume path/to/resume  --destination path/to/destination
 ```
+
+## Next Steps
+
+- General Code cleanup
+- Add status indicators
+- Better web scraping, headless?
+- Ability to go through a list of links provided and generate cover letters for them
+- Maybe add the option to be able to edit a coverletter first (this would mean it outputs latex which would then have to be bulk converted afterwards.)
+- A more direct integration with 

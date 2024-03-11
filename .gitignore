@@ -4,3 +4,4 @@ venv
 main.tex
 resume.pdf
 mdpdf.log
+__pycache__
