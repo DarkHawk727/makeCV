@@ -1,12 +1,13 @@
 import os
 import tiktoken
 from pydantic.v1 import SecretStr
+import logging
 
 
-from personal_info import PersonalInfo
-from cover_letter import CoverLetterContents
-from template import Template
-from job_listing import JobListing
+from components.personal_info import PersonalInfo
+from components.cover_letter import CoverLetterContents
+from components.template import Template
+from components.job_listing import JobListing
 
 
 from langchain_openai import ChatOpenAI
@@ -25,15 +26,15 @@ API_KEY: SecretStr = SecretStr(
 
 
 def main() -> None:
-    t = Template("template.tex")
+    t = Template("templates/deedy.tex")
 
     encoding = tiktoken.get_encoding(encoding_name="cl100k_base")
 
     resume_content = PDFMinerLoader(file_path="resume.pdf").load()[0].page_content
-    print(f"Resume Length: {len(encoding.encode(text=resume_content))}")
+    logging.info(f"Resume Length: {len(encoding.encode(text=resume_content))}")
     # Make this print in a better way
     j = JobListing("https://github.com/DarkHawk727/ARM-LEG-Simulator")
-    print(f"Job Listing Length: {len(encoding.encode(text=j.text))}")
+    logging.info(f"Job Listing Length: {len(encoding.encode(text=j.text))}")
 
     llm = ChatOpenAI(
         model="gpt-3.5-turbo", api_key=API_KEY, max_tokens=1000
@@ -63,10 +64,9 @@ def main() -> None:
         partial_variables={"format_instructions": parser.get_format_instructions()},
     )
 
-    print(f"Prompt Length: {len(encoding.encode(text=prompt.template))}")
-    print(
-        "Total: ", len(encoding.encode(text=prompt.template + j.text + resume_content))
-    )
+    logging.info(f"Prompt Length: {len(encoding.encode(text=prompt.template))}")
+    total_length = len(encoding.encode(text=prompt.template + j.text + resume_content))
+    logging.info(f"Total: {total_length}")
 
     chain = prompt | llm | parser
 
@@ -77,11 +77,12 @@ def main() -> None:
         }
     )
     x = len(encoding.encode(text="".join(out.contents)))
-    print(f"Generated {x} Tokens")
+    logging.info(f"Generated {x} Tokens")
 
     t.populate(cv=out, pi=PersonalInfo().from_yaml(fp="personal_info.yaml"))
     t.save("output.tex")
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     main()

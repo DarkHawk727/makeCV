@@ -1,5 +1,5 @@
-from personal_info import PersonalInfo
-from cover_letter import CoverLetterContents
+from components.personal_info import PersonalInfo
+from components.cover_letter import CoverLetterContents
 
 
 class Template:
