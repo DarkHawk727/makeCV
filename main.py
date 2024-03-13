@@ -13,7 +13,6 @@ from components.job_listing import JobListing
 from langchain_openai import ChatOpenAI
 from langchain_community.document_loaders import PDFMinerLoader
 from langchain.output_parsers import PydanticOutputParser
-from langchain_core.output_parsers import StrOutputParser
 from langchain.prompts import PromptTemplate
 
 
@@ -26,15 +25,14 @@ API_KEY: SecretStr = SecretStr(
 
 
 def main() -> None:
-    t = Template("templates/deedy.tex")
+    t = Template("templates/deedy/deedy.tex")
 
     encoding = tiktoken.get_encoding(encoding_name="cl100k_base")
 
     resume_content = PDFMinerLoader(file_path="resume.pdf").load()[0].page_content
     logging.info(f"Resume Length: {len(encoding.encode(text=resume_content))}")
-    # Make this print in a better way
+
     j = JobListing("https://github.com/DarkHawk727/ARM-LEG-Simulator")
-    logging.info(f"Job Listing Length: {len(encoding.encode(text=j.text))}")
 
     llm = ChatOpenAI(
         model="gpt-3.5-turbo", api_key=API_KEY, max_tokens=1000

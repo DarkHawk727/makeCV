@@ -1,6 +1,7 @@
 from langchain_community.document_loaders import AsyncChromiumLoader
 from langchain_community.document_transformers import Html2TextTransformer
 import tiktoken
+import logging
 
 
 class JobListing:
@@ -19,10 +20,14 @@ class JobListing:
         self.text = JobListing.html2text.transform_documents(documents=raw_content)[
             0
         ].page_content
+
         self.compression_ratio = 1 - (
             len(JobListing.encoding.encode(text=self.text))
             / len(JobListing.encoding.encode(text=raw_content[0].page_content))
         )
+        token_count = len(JobListing.encoding.encode(text=self.text))
+
+        logging.log(level=logging.INFO, msg=f"Scraped {token_count} tokens from {link}")
 
     def __str__(self) -> str:
         return self.text

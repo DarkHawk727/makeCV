@@ -27,8 +27,12 @@ makecv https://www.example.com/link/to/job-posting --resume path/to/resume  --de
 ## Next Steps
 
 - General Code cleanup
-- Add status indicators (using the `logging` module?)
+- ~~Add status indicators (using the `logging` module?)~~
 - ~~Better web scraping, headless?~~
 - Ability to go through a list of links provided and generate cover letters for them
-- Maybe add the option to be able to edit a coverletter first (this would mean it outputs latex which would then have to be bulk converted afterwards.)
-- Compile the LaTeX file into a pdf.
+- ~~Maybe add the option to be able to edit a coverletter first (this would mean it outputs latex which would then have to be bulk converted afterwards.)~~
+- Compile the LaTeX file into a pdf
+
+## Credits
+
+All credits for the templates to their respective creators.

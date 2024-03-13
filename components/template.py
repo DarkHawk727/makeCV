@@ -1,5 +1,6 @@
 from components.personal_info import PersonalInfo
 from components.cover_letter import CoverLetterContents
+import logging
 
 
 class Template:
@@ -31,6 +32,10 @@ class Template:
 
         self.contents = self.contents.replace("LETTER_CONTENT", paragraphs)
 
+        logging.log(
+            logging.INFO, msg=f"Template populated with {len(self.contents)} tokens"
+        )
+
     def __str__(self):
         return self.contents
 
@@ -43,3 +48,5 @@ class Template:
 
         with open(filename, "w") as f:
             f.write(self.contents)
+
+        logging.log(logging.INFO, msg=f"Saved to {filename}")
