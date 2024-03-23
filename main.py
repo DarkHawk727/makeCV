@@ -2,6 +2,7 @@ import os
 import tiktoken
 from pydantic.v1 import SecretStr
 import logging
+import sys
 
 
 from components.personal_info import PersonalInfo
@@ -32,7 +33,8 @@ def main() -> None:
     resume_content = PDFMinerLoader(file_path="resume.pdf").load()[0].page_content
     logging.info(f"Resume Length: {len(encoding.encode(text=resume_content))}")
 
-    j = JobListing("https://github.com/DarkHawk727/ARM-LEG-Simulator")
+    j = JobListing(sys.argv[1])
+    print(j)
 
     llm = ChatOpenAI(
         model="gpt-3.5-turbo", api_key=API_KEY, max_tokens=1000
@@ -48,7 +50,7 @@ def main() -> None:
             The general format is as follows:
             1. The first paragraph should be a few (1-3) sentences summarizing what the company does.
             2. A paragraph about how my experience/projects/skills would be an asset to the company.
-            3 [Optional]. A paragraph about how my ClifftonStrengths would be an asset to the company, write this paragraph only if the job listing mentions the company's values or culture.
+            # 3 [Optional]. A paragraph about how my ClifftonStrengths would be an asset to the company, write this paragraph only if the job listing mentions the company's values or culture.
             The overall length should be very close to, but not exceed, 500 words. DO NOT include any information like my email or address in the header of the letter. DO NOT end with a sign-off.
             Format Instructions:
             {format_instructions}
