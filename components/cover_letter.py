@@ -3,10 +3,10 @@ from typing import List
 
 
 class CoverLetterContents(BaseModel):
-    company_name: str = Field(description="The name of the company of the job listing.")
-    company_address: str = Field(
-        description="The address of the company you are applying to, including the city and state."
-    )
+    # company_name: str = Field(description="The name of the company of the job listing.")
+    # company_address: str = Field(
+    #     description="The address of the company you are applying to, including the city and state."
+    # )
     contents: List[str] = Field(
         description="The contents of the cover letter. Each paragraph should be in its own element."
     )
