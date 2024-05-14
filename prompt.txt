@@ -1,0 +1,6 @@
+Given the following resume and job description, write a cover letter formatted using markdown. When possible, try to specifically connect parts of the resume to aspects of the job description. DO NOT WRITE ABOUT ANYTHING THAT IS NOT IN THE RESUME. This means that you should only reference points in the job description that you can directly support with evidence from the resume. Your cover letter should provide answer why I am interested in the company and how my skills, experience, and projects make me a good fit for the job.
+Resume Text:
+{resume_text}
+
+Job Description Text:
+{job_desc_text}
